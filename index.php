@@ -1,4 +1,5 @@
 <?php 
+include('php/dbcon.php');
 include('components/header.php');
 ?> 
     <div class="social-icons position-relative">
