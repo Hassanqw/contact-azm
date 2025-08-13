@@ -1,4 +1,5 @@
 <?php 
+include('php/query.php');
 include('components/header.php');
 ?>
 <style>
@@ -92,28 +93,29 @@ h3 {
 </style>
 <div class="login-container">
     <h3 class="text-center mb-4"><i class="fas fa-user-plus"></i> Sign Up</h3>
-    <form action="signup_process.php" method="POST">
+    <form action="" method="POST">
         <div class="form-group input-with-icon">
-            <i class="fas fa-user"></i>
-            <input type="text" name="fullname" class="form-control" placeholder="Full Name" required>
+            <i class="fas fa-user-circle"></i>
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+            <small id="helpId" class="text-danger"><?php echo $userNameErr?></small>
         </div>
         <div class="form-group input-with-icon">
             <i class="fas fa-envelope"></i>
             <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+            <small id="helpId" class="text-danger"><?php echo $userEmailErr?></small>
         </div>
-        <div class="form-group input-with-icon">
-            <i class="fas fa-user-circle"></i>
-            <input type="text" name="username" class="form-control" placeholder="Username" required>
-        </div>
+       
         <div class="form-group input-with-icon">
             <i class="fas fa-lock"></i>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
+               <small id="helpId" class="text-danger"><?php echo $userPasswordErr?></small>
         </div>
         <div class="form-group input-with-icon">
             <i class="fas fa-lock"></i>
             <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+               <small id="helpId" class="text-danger"><?php echo $userConfirmPasswordErr?></small>
         </div>
-        <button type="submit" class="btn btn-custom btn-block">Sign Up</button>
+        <button type="submit" name="userSignUp" class="btn btn-custom btn-block">Sign Up</button>
         <div class="extra-links">
             Already have an account? <a href="login.php">Login here</a>
         </div>

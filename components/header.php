@@ -64,8 +64,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                           <li class="nav-item <?php if($current_page == 'index.php'){echo 'active';} ?>">
-    <a class="nav-link" href="index.php">Home</a>
+                           <li class="nav-item <?php if($current_page == 'home.php'){echo 'active';} ?>">
+    <a class="nav-link" href="home.php">Home</a>
 </li>
 <li class="nav-item <?php if($current_page == 'about.php'){echo 'active';} ?>">
     <a class="nav-link" href="about.php">About</a>
@@ -143,67 +143,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <i class="fas fa-user-plus mr-1"></i> Sign Up
     </a>
 </li>
+<li class="nav-item d-flex align-items-center ml-3 no-hover-line">
+    <a class="nav-link p-0 text-white" href="view-cart.php">
+        <i class="fas fa-shopping-cart mr-1"></i> Add to Cart
+    </a>
+</li>
 
 
 <!-- Cart Icon -->
 
 
-<!-- Cart Sidebar -->
-<div id="cart-sidebar">
-    <div class="cart-header">
-        <h4>Your Cart</h4>
-        <button id="close-cart" class="close-btn">&times;</button>
-    </div>
-    <div class="cart-body">
-        <!-- Product Item -->
-        <div class="cart-item">
-            <img src="https://via.placeholder.com/60" alt="Product">
-            <div class="item-info">
-                <h6>Luxury Perfume</h6>
-                <small>$45.00</small>
-                <div class="quantity">
-                    <button>-</button>
-                    <input type="number" value="1" min="1">
-                    <button>+</button>
-                </div>
-            </div>
-            <span class="item-remove">&times;</span>
-        </div>
 
-        <!-- Product Item -->
-        <div class="cart-item">
-            <img src="https://via.placeholder.com/60" alt="Product">
-            <div class="item-info">
-                <h6>Classic Perfume</h6>
-                <small>$35.00</small>
-                <div class="quantity">
-                    <button>-</button>
-                    <input type="number" value="2" min="1">
-                    <button>+</button>
-                </div>
-            </div>
-            <span class="item-remove">&times;</span>
-        </div>
-    </div>
-    <div class="cart-footer">
-        <div class="total">
-            <strong>Total:</strong>
-            <span>$115.00</span>
-        </div>
-        <button class="checkout-btn">Checkout</button>
-    </div>
-</div>
 
-<!-- Overlay -->
-<div id="cart-overlay"></div>
 
-<!-- Cart Icon in Navbar -->
-<li class="nav-item d-flex align-items-center ml-3 no-hover-line">
-    <a class="nav-link p-0 text-white position-relative" href="javascript:void(0);" id="open-cart">
-        <i class="fas fa-cart-plus fa-lg"></i>
-        <span class="badge badge-danger position-absolute" style="top: -8px; right: -12px;" id="cart-count">2</span>
-    </a>
-</li>
 
 <style>
 .no-hover-line a {

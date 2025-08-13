@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Aug 12, 2025 at 10:35 PM
+-- Generation Time: Aug 14, 2025 at 01:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `decor`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookingdesigner`
+--
+
+CREATE TABLE `bookingdesigner` (
+  `Booking_id` int(11) NOT NULL,
+  `D_Name` varchar(100) NOT NULL,
+  `D_Email` varchar(100) NOT NULL,
+  `D_ContactNumber` varchar(20) NOT NULL,
+  `Service_type` varchar(50) NOT NULL,
+  `Preferred_Date` date NOT NULL,
+  `Preferred_Time` time NOT NULL,
+  `Additional_Notes` text DEFAULT NULL,
+  `Designer_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookingdesigner`
+--
+
+INSERT INTO `bookingdesigner` (`Booking_id`, `D_Name`, `D_Email`, `D_ContactNumber`, `Service_type`, `Preferred_Date`, `Preferred_Time`, `Additional_Notes`, `Designer_id`, `created_at`) VALUES
+(1, 'hassan', 'hassanmeo548@gmail.com', '03152856238', 'Room Makeover', '2025-08-19', '07:13:00', 'Hello How Are You', 2, '2025-08-13 23:12:10');
 
 -- --------------------------------------------------------
 
@@ -71,6 +97,14 @@ CREATE TABLE `interioirdesigner` (
   `portfolio` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `interioirdesigner`
+--
+
+INSERT INTO `interioirdesigner` (`Designer_id`, `firstname`, `lastname`, `contactnumber`, `address`, `yearofexperience`, `specialization`, `portfolio`) VALUES
+(1, 'Hassan', 'Aslam ', 55457844, 'Pakisyan', 12, 'asdada', 'easda'),
+(2, 'Kabeer', 'Durani', 6428656, 'sasdasdasd', 11, 'sdadasdad', 'asdadasd');
+
 -- --------------------------------------------------------
 
 --
@@ -93,7 +127,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `productname`, `c_Id`, `brand`, `price`, `description`, `image`, `quantity`) VALUES
-(5, 'Shose', 11, 'awsome', 45502, 'dsasdasdasdas', 'https://th.bing.com/th/id/OIP.FxkUU66-2ZKwkRBbJfVwkwHaEh?o=7&rm=3&rs=1&pid=ImgDetMain&o=7&rm=3', 20);
+(5, 'Shose', 11, 'awsome', 45502, 'dsasdasdasdas', 'https://th.bing.com/th/id/OIP.FxkUU66-2ZKwkRBbJfVwkwHaEh?o=7&rm=3&rs=1&pid=ImgDetMain&o=7&rm=3', 20),
+(7, 'Sofa', 11, 'dsa', 2333, 'wdsadsa', 'eeee.jpg', 21);
 
 -- --------------------------------------------------------
 
@@ -125,6 +160,25 @@ CREATE TABLE `reviews` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `Id` int(11) NOT NULL,
+  `name` varchar(233) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`Id`, `name`) VALUES
+(1, 'user'),
+(2, 'admin\r\n');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -132,16 +186,18 @@ CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `email`, `password`) VALUES
-(1, 'ali khan', 'ali@gamil.com', '7896541'),
-(2, 'Kabeer', 'kabeer@gmail.com', '123');
+INSERT INTO `user` (`user_id`, `username`, `email`, `password`, `role_id`) VALUES
+(1, 'ali khan', 'ali@gamil.com', '7896541', 1),
+(9, 'hassan meo', 'hasan@gmail.com', '123', 2),
+(10, 'da', 'hassanmeo548@gmail.com', '123', 1);
 
 -- --------------------------------------------------------
 
@@ -169,6 +225,13 @@ INSERT INTO `userdetail` (`userdetail_id`, `user_id`, `role`, `firstname`, `last
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bookingdesigner`
+--
+ALTER TABLE `bookingdesigner`
+  ADD PRIMARY KEY (`Booking_id`),
+  ADD KEY `Designer_id` (`Designer_id`);
 
 --
 -- Indexes for table `categories`
@@ -215,10 +278,17 @@ ALTER TABLE `reviews`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `userdetail`
@@ -230,6 +300,12 @@ ALTER TABLE `userdetail`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bookingdesigner`
+--
+ALTER TABLE `bookingdesigner`
+  MODIFY `Booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -247,13 +323,13 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `interioirdesigner`
 --
 ALTER TABLE `interioirdesigner`
-  MODIFY `Designer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Designer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `productcategories`
@@ -268,10 +344,16 @@ ALTER TABLE `reviews`
   MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `userdetail`
@@ -282,6 +364,12 @@ ALTER TABLE `userdetail`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bookingdesigner`
+--
+ALTER TABLE `bookingdesigner`
+  ADD CONSTRAINT `bookingdesigner_ibfk_1` FOREIGN KEY (`Designer_id`) REFERENCES `interioirdesigner` (`Designer_id`);
 
 --
 -- Constraints for table `consultations`
@@ -310,6 +398,12 @@ ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`designer_id`) REFERENCES `interioirdesigner` (`Designer_id`),
   ADD CONSTRAINT `reviews_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`Id`);
 
 --
 -- Constraints for table `userdetail`

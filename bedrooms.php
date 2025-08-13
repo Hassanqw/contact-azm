@@ -2,6 +2,8 @@
 include('php/dbcon.php');
 include('components/header.php');
 ?>
+
+
   <style>
        body {
             background-color: #0d0d0d;
@@ -126,25 +128,37 @@ foreach($allproduct as $product){
 ?>
 <div class="col-md-4 col-sm-6">
     <div class="decor-card" data-toggle="modal" data-target="#productModal">
-        <img src="adminPanel/images/<?php echo $product["image"]?>" alt="Luxury Sofa">
+        <img src="/dashboard/images/<?php echo htmlspecialchars($product['image']); ?>" 
+             alt="<?php echo htmlspecialchars($product['productname']); ?>" 
+             class="img-fluid rounded">
+
         <div class="p-3">
-            <h5 class="decor-title"><?php echo $product['productname']?></h5>
-            <p class="mb-2"><?php echo $product['description']?></p>
-            <p class="text-success mb-1" style="font-size: 0.85rem;">
-                In Stock: <?php echo $product['quantity']?>
+            <h5 class="decor-title">
+                <?php echo htmlspecialchars($product['productname']); ?>
+            </h5>
+
+            <p class="mb-2">
+                <?php echo htmlspecialchars($product['description']); ?>
             </p>
-            <p class="price mb-3">Rs <?php echo $product['price']?></p>
+
+            <p class="text-success mb-1" style="font-size: 0.85rem;">
+                In Stock: <?php echo (int)$product['quantity']; ?>
+            </p>
+
+            <p class="price mb-3">
+                Rs <?php echo number_format($product['price']); ?>
+            </p>
 
             <!-- Add to Cart Button with product_id in URL -->
-     <a href="?product_id=<?php echo $product['product_id']; ?>" 
-   class="btn btn-decor w-100">
-   Add to Cart
-</a>
-
-
+            <a href="?product_id=<?php echo urlencode($product['product_id']); ?>" 
+               class="btn btn-decor w-100">
+               Add to Cart
+            </a>
         </div>
     </div>
 </div>
+
+    
 <?php } ?>
 
     
@@ -180,7 +194,7 @@ foreach($allproduct as $product){
           <!-- Product Image -->
           <div class="col-md-6">
             <div class="overflow-hidden rounded shadow">
-              <img src="adminPanel/images/<?php echo $product["image"]?>" 
+              <img src="dashboard/images/<?php echo $product["image"]?>" 
                    class="img-fluid rounded zoom-effect" 
                    alt="Luxury Sofa">
             </div>
@@ -226,8 +240,9 @@ foreach($allproduct as $product){
               </div>
             </div>
 
-            <!-- Add to Cart -->
-            <button class="btn btn-warning btn-block mt-3 fw-bold glow-btn">Add to Cart</button>
+            <a href="view-cart.php">
+            <button name="Addtocart" class="btn btn-warning btn-block mt-3 fw-bold glow-btn">Add to Cart</button>
+            </a>
           </div>
         </div>
       </div>
@@ -240,10 +255,11 @@ foreach($allproduct as $product){
   </div>
 </div>
     </div>
+    </div>
    <?php
      }
     }
-    ?></div>
+    ?>
    
 <!-- Styles -->
 <style>
